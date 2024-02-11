@@ -1,0 +1,200 @@
+// Variables para almacenar los números y el resultado
+float num1 = 0;
+float num2 = 0;
+float resultado = 0;
+
+// Variable para almacenar la operación actual
+char operacion = ' ';
+
+void setup() {
+  size(350, 500);
+}
+
+int valorDisplay = 0;
+
+void draw() {
+  background(220);
+  textSize(50);
+
+  // Botón 1
+  fill(255);
+  rect(20, 80, 60, 60);
+  fill(0);
+  text("1", 50, 120);
+
+  // Botón 2
+  fill(255);
+  rect(100, 80, 60, 60);
+  fill(0);
+  text("2", 130, 120);
+
+  // Botón 3
+  fill(255);
+  rect(180, 80, 60, 60);
+  fill(0);
+  text("3", 210, 120);
+
+  // Botón suma
+  fill(255);
+  rect(260, 80, 60, 60);
+  fill(0);
+  text("+", 290, 120);
+
+  // Botón 4
+  fill(255);
+  rect(20, 160, 60, 60);
+  fill(0);
+  text("4", 50, 200);
+
+  // Botón 5
+  fill(255);
+  rect(100, 160, 60, 60);
+  fill(0);
+  text("5", 130, 200);
+
+  // Botón 6
+  fill(255);
+  rect(180, 160, 60, 60);
+  fill(0);
+  text("6", 210, 200);
+
+  // Botón resta
+  fill(255);
+  rect(260, 160, 60, 60);
+  fill(0);
+  text("-", 290, 200);
+
+  // Botón 7
+  fill(255);
+  rect(20, 240, 60, 60);
+  fill(0);
+  text("7", 50, 280);
+
+  // Botón 8
+  fill(255);
+  rect(100, 240, 60, 60);
+  fill(0);
+  text("8", 130, 280);
+
+  // Botón 9
+  fill(255);
+  rect(180, 240, 60, 60);
+  fill(0);
+  text("9", 210, 280);
+
+  // Botón multiplicación
+  fill(255);
+  rect(260, 240, 60, 60);
+  fill(0);
+  text("*", 290, 280);
+
+  // Botón 0
+  fill(255);
+  rect(100, 320, 60, 60);
+  fill(0);
+  text("0", 130, 360);
+
+  // Botón división
+  fill(255);
+  rect(180, 320, 60, 60);
+  fill(0);
+  text("/", 210, 360);
+
+  // Botón de igual
+  fill(255);
+  rect(260, 320, 60, 60);
+  fill(0);
+  text("=", 290, 360);
+
+  // Botón de borrar
+  fill(255);
+  rect(20, 320, 60, 60);
+  fill(0);
+  textSize(20);
+  text("C", 50, 360);
+
+  // Display o pantalla de resultados
+  fill(255);
+  rect(20, 20, 300, 40);
+  fill(0);
+  text(resultado, 170, 55);
+}
+
+void mousePressed() {
+  // Verificar si se hizo clic en los botones numéricos
+  if (mouseX > 20 && mouseX < 80 && mouseY > 80 && mouseY < 140) {
+    actualizarValorDisplay(1);
+  } else if (mouseX > 100 && mouseX < 160 && mouseY > 80 && mouseY < 140) {
+    actualizarValorDisplay(2);
+  } else if (mouseX > 180 && mouseX < 240 && mouseY > 80 && mouseY < 140) {
+    actualizarValorDisplay(3);
+  } else if (mouseX > 260 && mouseX < 320 && mouseY > 80 && mouseY < 140) {
+    operacion = '+';
+  } else if (mouseX > 20 && mouseX < 80 && mouseY > 160 && mouseY < 220) {
+    actualizarValorDisplay(4);
+  } else if (mouseX > 100 && mouseX < 160 && mouseY > 160 && mouseY < 220) {
+    actualizarValorDisplay(5);
+  } else if (mouseX > 180 && mouseX < 240 && mouseY > 160 && mouseY < 220) {
+    actualizarValorDisplay(6);
+  } else if (mouseX > 260 && mouseX < 320 && mouseY > 160 && mouseY < 220) {
+    operacion = '-';
+  } else if (mouseX > 20 && mouseX < 80 && mouseY > 240 && mouseY < 300) {
+    actualizarValorDisplay(7);
+  } else if (mouseX > 100 && mouseX < 160 && mouseY > 240 && mouseY < 300) {
+    actualizarValorDisplay(8);
+  } else if (mouseX > 180 && mouseX < 240 && mouseY > 240 && mouseY < 300) {
+    actualizarValorDisplay(9);
+  } else if (mouseX > 260 && mouseX < 320 && mouseY > 240 && mouseY < 300) {
+    operacion = '*';
+  } else if (mouseX > 100 && mouseX < 160 && mouseY > 320 && mouseY < 380) {
+    actualizarValorDisplay(0);
+  } else if (mouseX > 180 && mouseX < 240 && mouseY > 320 && mouseY < 380) {
+    operacion = '/';
+  } else if (mouseX > 260 && mouseX < 320 && mouseY > 320 && mouseY < 380) {
+    // Si se hace clic en igual, calcula el resultado
+    calcularResultado();
+  } else if (mouseX > 20 && mouseX < 80 && mouseY > 320 && mouseY < 380) {
+    // Si se hace clic en borrar, reiniciar la calculadora
+    reiniciarCalculadora();
+  }
+}
+
+// Función para actualizar el valor en el display
+void actualizarValorDisplay(int valor) {
+  valorDisplay = valor;
+  if (operacion == ' ')
+    num1 = num1 * 10 + valor;
+  else {
+    num2 = num2 * 10 + valor;
+  }
+}
+
+// Función para calcular el resultado
+void calcularResultado() {
+  switch(operacion) {
+  case '+':
+    resultado = num1 + num2;
+    break;
+  case '-':
+    resultado = num1 - num2;
+    break;
+  case '*':
+    resultado = num1 * num2;
+    break;
+  case '/':
+    resultado = num1 / num2;
+    break;
+  }
+  // Reiniciar los números y la operación
+  num1 = 0;
+  num2 = 0;
+  operacion = ' ';
+}
+
+// Función para reiniciar la calculadora
+void reiniciarCalculadora() {
+  num1 = 0;
+  num2 = 0;
+  resultado = 0;
+  operacion = ' ';
+}
